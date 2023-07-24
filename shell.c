@@ -2,15 +2,14 @@
 
 /**
   * main - shell main function
-  * argc: argument count
-  * argv: arguments variable
+  * @ac: argument count
+  * @argv: arguments variable
   * Return: return 0
   */
 
 
 int main(int ac, char **argv)
-{
-char *lineptr = NULL, *lineptr_dup = NULL, *token;
+{char *lineptr = NULL, *lineptr_dup = NULL, *token;
 	size_t n = 0;
 	ssize_t linelen;
 	int token_len = 0, i;
@@ -18,22 +17,18 @@ char *lineptr = NULL, *lineptr_dup = NULL, *token;
 
 	(void)ac;
 	while (1)
-	{
-		printf("$shell@: ");
+	{printf("$shell@: ");
 		linelen = getline(&lineptr, &n, stdin);
-		if (linelen == - 1)
-		{
-			printf("[Disconnected...]\n");
+		if (linelen == -1)
+		{printf("[Disconnected...]\n");
 			return (-1);
 		}
 		lineptr_dup = malloc(sizeof(char) * linelen);
 		if (lineptr_dup == NULL)
-		{
-			perror("tsh: memory allocatiotion error");
+		{perror("tsh: memory allocatiotion error");
 			return (-1);
 		}
 		_strcpy(lineptr_dup, lineptr);
-
 		token = strtok(lineptr, delim);
 		while (token != NULL)
 		{
@@ -50,7 +45,7 @@ char *lineptr = NULL, *lineptr_dup = NULL, *token;
 			token = strtok(NULL, delim);
 		}
 		argv[i] = NULL;
-		execmd(argv);
+		fork_and_exec(argv);
 	}
 	free(lineptr_dup);
 	free(lineptr);

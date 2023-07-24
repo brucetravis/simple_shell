@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
-  * function - that get the path command
-  * @path: the command
+  * _path - that get the path command
+  * @str: the command
   * Return: return NULL
   */
 
@@ -11,8 +11,8 @@ char *_path(char *str)
 	char *token_path, *path, *path_dup, *file_path;
 	int str_length, dir_length;
 	struct stat buffer;
-	path = getenv("PATH");
 
+	path = getenv("PATH");
 	if (path)
 	{
 		path_dup = _strdup(path);

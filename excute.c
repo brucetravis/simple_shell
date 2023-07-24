@@ -2,7 +2,7 @@
 
 /**
   * execmd - function that excute
-  * argv: the argument varible
+  * @argv: the argument varible
   */
 
 void execmd(char **argv)
@@ -18,5 +18,38 @@ void execmd(char **argv)
 		{
 			perror("Error");
 		};
+	}
+}
+
+/**
+  * fork_and_exec - fork function
+  * @argv: the argument
+ */
+
+void fork_and_exec(char **argv)
+{
+	pid_t pid = fork();
+
+	if (pid == -1)
+	{
+		perror("Fork failed");
+		exit(EXIT_FAILURE);
+	}
+
+	if (pid == 0)
+	{
+		execmd(argv);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		int status;
+
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+		{
+			int exit_status = WEXITSTATUS(status);
+		printf("Child process exited with status: %d\n", exit_status);
+		}
 	}
 }

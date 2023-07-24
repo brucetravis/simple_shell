@@ -11,10 +11,12 @@
 
 void execmd(char **argv);
 char *_path(char *str);
+void fork_and_exec(char **argv);
 
 /** string functions **/
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 int _strlen(char *str);
 char *_strdup(char *str);
+int _putchar(char c);
 #endif

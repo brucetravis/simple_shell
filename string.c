@@ -98,3 +98,14 @@ int _strlen(char *str)
 		;
 	return (i);
 }
+
+/**
+  * _putchar - function the print char
+  * @c: the character
+  * Return: the char
+  */
+
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
