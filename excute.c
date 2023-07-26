@@ -5,16 +5,16 @@
   * @argv: the argument varible
   */
 
-void execmd(char **argv)
+void execmd(char **argv, char **environ)
 {
-	char *str = NULL, *command = NULL;
+	char *str = NULL;
 
 	if (argv)
 	{
 		str = argv[0];
-		command = _path(str);
+		/*command = _path(str);*/
 
-		if (execve(command, argv, NULL) == -1)
+		if (execve(str, argv, environ) == -1)
 		{
 			perror("Error");
 		};
@@ -26,7 +26,7 @@ void execmd(char **argv)
   * @argv: the argument
  */
 
-void fork_and_exec(char **argv)
+void fork_and_exec(char **argv, char **environ)
 {
 	pid_t pid = fork();
 
@@ -38,7 +38,7 @@ void fork_and_exec(char **argv)
 
 	if (pid == 0)
 	{
-		execmd(argv);
+		execmd(argv, environ);
 		exit(EXIT_SUCCESS);
 	}
 	else
@@ -46,10 +46,10 @@ void fork_and_exec(char **argv)
 		int status;
 
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && WEXITSTATUS(status == EXIT_SUCCESS))
 		{
 			int exit_status = WEXITSTATUS(status);
-		printf("Child process exited with status: %d\n", exit_status);
+			exit(exit_status);
 		}
 	}
 }

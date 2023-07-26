@@ -1,5 +1,5 @@
 #include "shell.h"
-
+#define MAX_TOKEN 64
 /**
   * main - shell main function
   * @ac: argument count
@@ -7,47 +7,40 @@
   * Return: return 0
   */
 
-
-int main(int ac, char **argv)
-{char *lineptr = NULL, *lineptr_dup = NULL, *token;
+int main(int ac, char **argv, char **environ)
+{char *lineptr = NULL, *token[MAX_TOKEN], *token_l;
 	size_t n = 0;
 	ssize_t linelen;
-	int token_len = 0, i;
+	int token_count;
 	const char *delim = " \n";
 
-	(void)ac;
+	(void)ac, (void)argv;
 	while (1)
-	{printf("$shell@: ");
+	{
+		if (isatty(STDIN_FILENO) != 0)
+		{
+			write(1,"$ ", 2);
+		}
 		linelen = getline(&lineptr, &n, stdin);
 		if (linelen == -1)
-		{printf("[Disconnected...]\n");
-			return (-1);
-		}
-		lineptr_dup = malloc(sizeof(char) * linelen);
-		if (lineptr_dup == NULL)
-		{perror("tsh: memory allocatiotion error");
-			return (-1);
-		}
-		_strcpy(lineptr_dup, lineptr);
-		token = strtok(lineptr, delim);
-		while (token != NULL)
 		{
-			token_len++;
-			token = strtok(NULL, delim);
+			free(lineptr);
+			exit(EXIT_SUCCESS);
 		}
-		token_len++;
-		argv = malloc(sizeof(char *) * token_len);
-		token = strtok(lineptr_dup, delim);
-		for (i = 0; token != NULL; i++)
+		token_count = 0;
+		token_l = strtok(lineptr, delim);
+		while (token_l != NULL && token_count < MAX_TOKEN - 1)
 		{
-			argv[i] = malloc(sizeof(char) * _strlen(token));
-			_strcpy(argv[i], token);
-			token = strtok(NULL, delim);
+			token[token_count] = token_l;
+			token_count++;
+			token_l = strtok(NULL, delim);
 		}
-		argv[i] = NULL;
-		fork_and_exec(argv);
+		token[token_count] = NULL;
+		if (token_count > 0)
+		{
+			fork_and_exec(token, environ);
+		}
 	}
-	free(lineptr_dup);
 	free(lineptr);
 	return (0);
 }
