@@ -14,7 +14,7 @@ char *_path(char *str);
 void fork_and_exec(char **argv, char **environ);
 void free_argv(char **argv);
 
-/** string functions **/
+/** string function **/
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 int _strlen(char *str);

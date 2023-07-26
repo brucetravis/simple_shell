@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _strcpy - Entry point
+ * _strcpy - Entry points
  * @dest: first pointer
  * @src: second pointer
  * Return: return dest

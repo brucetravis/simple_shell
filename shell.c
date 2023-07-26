@@ -1,7 +1,7 @@
 #include "shell.h"
 #define MAX_TOKEN 64
 /**
-  * main - shell main function
+  * main - shell main functions
   * @ac: argument count
   * @argv: arguments variable
   * Return: return 0

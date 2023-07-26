@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-  * execmd - function that excute
+  * execmd - functions that excute
   * @argv: the argument varible
   */
 
