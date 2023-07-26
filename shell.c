@@ -4,6 +4,7 @@
   * main - shell main functions
   * @ac: argument count
   * @argv: arguments variable
+  * @environ: env var
   * Return: return 0
   */
 
@@ -19,7 +20,7 @@ int main(int ac, char **argv, char **environ)
 	{
 		if (isatty(STDIN_FILENO) != 0)
 		{
-			write(1,"$ ", 2);
+			write(1, "$ ", 2);
 		}
 		linelen = getline(&lineptr, &n, stdin);
 		if (linelen == -1)
