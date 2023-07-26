@@ -100,12 +100,21 @@ int _strlen(char *str)
 }
 
 /**
-  * _putchar - function the print char
-  * @c: the character
-  * Return: the char
+  * _strchr - character marched function
+  * @str: the string
+  * @ch: the character
+  * Return: return 0
   */
 
-int _putchar(char c)
+int _strchr(char *str, char ch)
 {
-	return (write(1, &c, 1));
+	while (*str)
+	{
+		if (*str == ch)
+		{
+			return (1);
+		}
+		str++;
+	}
+	return (0);
 }

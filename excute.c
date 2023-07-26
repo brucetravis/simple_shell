@@ -3,28 +3,36 @@
 /**
   * execmd - functions that excute
   * @argv: the argument varible
+  * @environ: environment variable
   */
 
 void execmd(char **argv, char **environ)
 {
-	char *str = NULL;
-
-	if (argv)
+	if (argv && argv[0])
 	{
-		str = argv[0];
-		/*command = _path(str);*/
+		char *str = argv[0];
+		char *execv_commd = _path(str);
 
-		if (execve(str, argv, environ) == -1)
+		if (execv_commd != NULL)
 		{
-			perror("Error");
-		};
+			if (execve(execv_commd, argv, environ) == -1)
+			{
+				perror("Error");
+			}
+			free(execv_commd);
+		}
+		else
+		{
+			command_err(str);
+		}
 	}
 }
 
 /**
   * fork_and_exec - fork function
   * @argv: the argument
- */
+  * @environ: environment variable
+  */
 
 void fork_and_exec(char **argv, char **environ)
 {
@@ -35,7 +43,6 @@ void fork_and_exec(char **argv, char **environ)
 		perror("Fork failed");
 		exit(EXIT_FAILURE);
 	}
-
 	if (pid == 0)
 	{
 		execmd(argv, environ);
@@ -49,6 +56,7 @@ void fork_and_exec(char **argv, char **environ)
 		if (WIFEXITED(status) && WEXITSTATUS(status == EXIT_SUCCESS))
 		{
 			int exit_status = WEXITSTATUS(status);
+
 			exit(exit_status);
 		}
 	}
