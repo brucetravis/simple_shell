@@ -13,6 +13,11 @@ void execmd(char **argv, char **environ)
 		char *str = argv[0];
 		char *execv_commd = _path(str);
 
+		if (str == NULL || *str == '\0')
+		{
+			command_err("");
+			exit(127);
+		}
 		if (execv_commd != NULL)
 		{
 			if (execve(execv_commd, argv, environ) == -1)

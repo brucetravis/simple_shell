@@ -6,11 +6,11 @@
 
 void command_err(const char *str)
 {
-	const char err_msg[] = "./shell: No such file or directory";
+	char err_msg[] = "./hsh: 1: ";
+	char not_found_msg[] = ": not found\n";
 
-	(void)str;
 	write(2, err_msg, sizeof(err_msg) - 1);
-	/*write(2, str, strlen(str));*/
-	write(2, "\n", 1);
-	exit(EXIT_FAILURE);
+	write(2, str, strlen(str));
+	write(2, not_found_msg, sizeof(not_found_msg) - 1);
+	exit(127);
 }

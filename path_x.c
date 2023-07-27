@@ -17,7 +17,10 @@ char *_path(char *argv)
 			return (_strdup(argv));
 		}
 		else
+		{
+			command_err(argv);
 			return (NULL);
+		}
 	}
 	else
 	{
@@ -39,7 +42,8 @@ char *_path(char *argv)
 		}
 		path_dir = strtok(NULL, ":");
 	}
-	free(path_dir);
+	free(path_dup);
+	command_err(argv);
 	return (NULL);
 	}
 }
