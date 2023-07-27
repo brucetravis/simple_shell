@@ -3,6 +3,13 @@
 #define MAX_COMMAND_LENGTH 1024
 #define PROMPT "#cisfun$ "
 
+/**
+ * main - handling arguments
+ * @argc: argument count.
+ * @argv: argumment vector
+ *
+ */
+
 int main(void)
 {
 char command[MAX_COMMAND_LENGTH];
