@@ -3,7 +3,7 @@
 /**
   * execmd - functions that excute
   * @argv: the argument varible
-  * @environ: environment variable
+  * @environ: environment variable used
   */
 
 void execmd(char **argv, char **environ)
