@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
-  * command_err - function that handles command err
+  * command_err - function that handles the command errors
   * @str: the command
   */
 
