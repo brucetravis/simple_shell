@@ -39,7 +39,7 @@ int main(int ac, char **argv, char **environ)
 		token[token_count] = NULL;
 		if (token_count > 0)
 		{
-			fork_and_exec(token, environ);
+			execute_builtin(token, environ);
 		}
 	}
 	free(lineptr);

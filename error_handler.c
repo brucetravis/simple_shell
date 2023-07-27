@@ -4,7 +4,7 @@
   * @str: the command
   */
 
-void command_err(const char *str)
+int command_err(const char *str)
 {
 	char err_msg[] = "./hsh: 1: ";
 	char not_found_msg[] = ": not found\n";
@@ -12,5 +12,28 @@ void command_err(const char *str)
 	write(2, err_msg, sizeof(err_msg) - 1);
 	write(2, str, strlen(str));
 	write(2, not_found_msg, sizeof(not_found_msg) - 1);
-	exit(127);
+	return (127);
+}
+
+/**
+ * _strcmp - function that compare strings
+ * @s1: first string
+ * @s2: second string
+ * Return: return 0
+ */
+
+int _strcmp(char *s1, char *s2)
+{
+	int i = 0;
+
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+		i++;
+	}
+
+	return (0);
 }
