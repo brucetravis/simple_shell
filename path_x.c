@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
-  * _path - function that handles path
+  * _path - function that handles the path
   * @argv: the command
   * Return: return NULL
   */
