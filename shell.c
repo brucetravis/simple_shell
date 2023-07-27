@@ -4,7 +4,7 @@
   * main - shell main functions
   * @ac: argument count
   * @argv: arguments variable
-  * @environ: env var
+  * @environ: envroment variable
   * Return: return 0
   */
 

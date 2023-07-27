@@ -86,7 +86,7 @@ char *_strdup(char *str)
 }
 
 /**
-  * _strlen - funtion that return string lenght
+  * _strlen - funtion that return the length of a string
   * @str: the string
   * Return: return i
   */
