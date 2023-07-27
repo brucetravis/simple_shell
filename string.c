@@ -100,7 +100,7 @@ int _strlen(char *str)
 }
 
 /**
-  * _strchr - character marched function
+  * _strchr - character marched to the function
   * @str: the string
   * @ch: the character
   * Return: return 0
