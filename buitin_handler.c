@@ -14,15 +14,21 @@ void execute_builtin(char **token, char **environ, char **lineptr)
 		free(*lineptr);
 		exit(0);
 	}
-	if (_strcmp(token[0], "env") == 0)
+	else if (_strcmp(token[0], "env") == 0)
          {
                  execut_env(environ);
                  exit(0);
          }
+	else if (_strcmp(token[0], "exit ", 5) == 0)
+	{
+	    int exit_status = atoi(token[0] + 5);
+            exit(exit_status);
+	}
 	else
 	{
 		fork_and_exec(token, environ, lineptr);
 	}
+
 }
 
 void execut_env(char **environ)
