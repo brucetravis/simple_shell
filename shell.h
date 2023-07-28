@@ -17,6 +17,7 @@ void fork_and_exec(char **argv, char **environ, char **lineptr);
 void free_argv(char **argv);
 void execute_builtin(char **token, char **environ, char **lineptr);
 void execute_exit(int status);
+void execut_env(char **environ);
 /*error handleer*/
 int command_err(char *str);
 
