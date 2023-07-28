@@ -26,6 +26,7 @@ void execute_builtin(char **token, char **environ, char **lineptr)
 	else if (_strcmp(token[0], "env") == 0)
 	{
 		execut_env(environ);
+		exit(0);
 	}
 	else
 	{
