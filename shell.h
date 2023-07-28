@@ -13,12 +13,12 @@
 
 void execmd(char **argv, char **environ);
 char *_path(char *argv);
-void fork_and_exec(char **argv, char **environ);
+void fork_and_exec(char **argv, char **environ, char **lineptr);
 void free_argv(char **argv);
-void execute_builtin(char **token, char **environ);
+void execute_builtin(char **token, char **environ, char **lineptr);
 void execute_exit(int status);
 /*error handleer*/
-int command_err(const char *str);
+int command_err(char *str);
 
 /** string function **/
 char *_strcpy(char *dest, char *src);

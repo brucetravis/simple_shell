@@ -15,7 +15,6 @@ void execmd(char **argv, char **environ)
 
 		if (str == NULL || *str == '\0')
 		{
-			command_err("");
 			exit(127);
 		}
 		if (execv_commd != NULL)
@@ -23,6 +22,7 @@ void execmd(char **argv, char **environ)
 			if (execve(execv_commd, argv, environ) == -1)
 			{
 				perror("Error");
+				exit(EXIT_SUCCESS);
 			}
 			free(execv_commd);
 		}
@@ -37,16 +37,17 @@ void execmd(char **argv, char **environ)
   * fork_and_exec - fork function
   * @argv: the argument
   * @environ: environment variable
+  * @lineptr: the line buffer
   */
 
-void fork_and_exec(char **argv, char **environ)
+void fork_and_exec(char **argv, char **environ, char **lineptr)
 {
 	pid_t pid = fork();
 
 	if (pid == -1)
 	{
 		perror("Fork failed");
-		exit(EXIT_FAILURE);
+		exit(2);
 	}
 	if (pid == 0)
 	{
@@ -57,12 +58,11 @@ void fork_and_exec(char **argv, char **environ)
 	{
 		int status;
 
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status) && WEXITSTATUS(status == EXIT_SUCCESS))
+		wait(&status);
+		if (status != 0)
 		{
-			int exit_status = WEXITSTATUS(status);
-
-			exit(exit_status);
+			free(*lineptr);
+			exit(2);
 		}
 	}
 }

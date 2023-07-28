@@ -2,15 +2,16 @@
 /**
   * command_err - function that handles the command errors
   * @str: the command
+  * Return: return 127
   */
 
-int command_err(const char *str)
+int command_err(char *str)
 {
 	char err_msg[] = "./hsh: 1: ";
 	char not_found_msg[] = ": not found\n";
 
 	write(2, err_msg, sizeof(err_msg) - 1);
-	write(2, str, strlen(str));
+	write(2, str, _strlen(str));
 	write(2, not_found_msg, sizeof(not_found_msg) - 1);
 	return (127);
 }
